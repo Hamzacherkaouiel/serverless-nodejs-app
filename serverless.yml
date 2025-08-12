@@ -1,0 +1,49 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: hamzacherkaoui
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: serveless-nodejs
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: serverless-nodejs-app
+
+provider:
+  name: aws
+  runtime: nodejs22.x
+  # Uncomment to easily set up a custom domain. Read the docs for more details:
+  # https://www.serverless.com/framework/docs/providers/aws/guide/domains
+  # domain: api.example.com
+  environment:   
+     DEBUG: ${env:DEBUG , 0}
+     STAGE: ${env:STAGE,"prod"}
+  iam:
+    role:
+      name: serverless-ssm-role
+      statements:
+         - Effect: "Allow"
+           Resource: '*'
+           Action:
+             - "ssm:GetParameter"
+             - "ssm:GetParameters"
+             - "ssm:GetParametersByPath"
+             - "ssm:GetParameterHistory"
+             - "ssm:DescribeParameters"
+
+
+
+
+functions:
+  api:
+    handler: src/handler.handler
+    events:
+      - httpApi: "*"
+
+
+custom:
+  dotenv:
+    exclude:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - DATABASE
+
+plugins:
+  - serverless-offline
+
