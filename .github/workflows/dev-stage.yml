@@ -30,13 +30,13 @@ jobs:
     - name: Install neonctl and tsx
       run: npm install -g neonctl tsx
     - name: Delete Previous Branch
-      run: neonctl branches delete dev --api-key ${{ env.API_KEY }} --project-id soft-dawn-50446361
+      run: neonctl branches delete dev --api-key ${{ env.API_KEY }} --project-id ${{secrets.NEON_PROJECT_ID}}
       continue-on-error: true
     - name: Create Branched Database 
-      run: neonctl branches create --name dev --api-key ${{ env.API_KEY }} --project-id soft-dawn-50446361
+      run: neonctl branches create --name dev --api-key ${{ env.API_KEY }} --project-id ${{secrets.NEON_PROJECT_ID}}
     - name: Branch Connection String in Parameter Store
       run: |
-        export DB_URL=$(neonctl connection-string --branch dev --api-key ${{ env.API_KEY }} --project-id soft-dawn-50446361)
+        export DB_URL=$(neonctl connection-string --branch dev --api-key ${{ env.API_KEY }} --project-id ${{secrets.NEON_PROJECT_ID}})
         npx tsx src/cli/putSecrets.js dev $DB_URL
     - name: Deploy dev stage
       run: |
