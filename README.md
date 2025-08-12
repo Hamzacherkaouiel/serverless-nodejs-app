@@ -25,7 +25,7 @@ After running deploy, you should see output similar to:
 
 ```
 serveless-nodejs-app@1.0.0 deploy
-> serverless deploy --stage prod --region us-east-2
+> serverless deploy --stage prod --region X
 
 
 
@@ -33,8 +33,8 @@ serveless-nodejs-app@1.0.0 deploy
 ✔ Installed Serverless Framework v4.18.0
 Disable auto-updates by adding "frameworkVersion" to your serverless.yml (frameworkVersion: ~4.18.0)
 
-Deploying "serverless-nodejs-app" to stage "prod" (us-east-2)
-✔ Service deployed to stack serverless-nodejs-app-prod (29s)
+Deploying "serverless-application" to stage "prod" (region)
+✔ Service deployed to stack serverless-application (29s)
 endpoint: ANY - https://XXXXXX.XXXXXamazonaws.com
 
 functions:
