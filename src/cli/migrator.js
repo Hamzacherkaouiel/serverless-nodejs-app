@@ -14,9 +14,8 @@ async function performMigration() {
     if (!dbUrl) {
         return 
     }
-    // neon serverless pool
-    // https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client
-    neonConfig.webSocketConstructor = ws;  // <-- this is the key bit
+    
+    neonConfig.webSocketConstructor = ws;  
     const pool = new Pool({ connectionString: dbUrl });
     pool.on('error', err => console.error(err));  
     // ...
